@@ -18,6 +18,9 @@ return new class extends Migration
             $table->text('content');
             $table->json('tags')->nullable();
             $table->timestamps();
+
+            $table->index(['locale', 'key']);  // Index the locale and key for faster querying
+            $table->index('tags');             // Index the tags field for faster searches, though this will be slower with JSON
         });
     }
 
