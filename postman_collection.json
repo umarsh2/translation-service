@@ -1,0 +1,126 @@
+{
+    "info": {
+      "name": "Translation Management API",
+      "description": "Postman collection for testing Translation Management API endpoints.",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Get Translations",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <your_access_token>",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost/api/translations",
+            "protocol": "http",
+            "host": ["localhost"],
+            "path": ["api", "translations"],
+            "query": [
+              { "key": "locale", "value": "en" },
+              { "key": "tags", "value": "mobile" }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Create Translation",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <your_access_token>",
+              "type": "text"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost/api/translations",
+            "protocol": "http",
+            "host": ["localhost"],
+            "path": ["api", "translations"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"locale\": \"en\",\n  \"key\": \"welcome_message\",\n  \"content\": \"Welcome to our platform!\",\n  \"tags\": [\"web\"]\n}"
+          }
+        }
+      },
+      {
+        "name": "Update Translation",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <your_access_token>",
+              "type": "text"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost/api/translations/1",
+            "protocol": "http",
+            "host": ["localhost"],
+            "path": ["api", "translations", "1"]
+          },
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"locale\": \"en\",\n  \"key\": \"welcome_message\",\n  \"content\": \"Welcome to our updated platform!\",\n  \"tags\": [\"mobile\"]\n}"
+          }
+        }
+      },
+      {
+        "name": "Delete Translation",
+        "request": {
+          "method": "DELETE",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <your_access_token>",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost/api/translations/1",
+            "protocol": "http",
+            "host": ["localhost"],
+            "path": ["api", "translations", "1"]
+          }
+        }
+      },
+      {
+        "name": "Export Translations",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <your_access_token>",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost/api/export",
+            "protocol": "http",
+            "host": ["localhost"],
+            "path": ["api", "export"]
+          }
+        }
+      }
+    ]
+  }
