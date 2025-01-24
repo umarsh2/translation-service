@@ -22,10 +22,9 @@ class TranslationFactory extends Factory
     public function definition()
     {
         return [
-            'locale' => $this->faker->randomElement(['en', 'fr', 'es']),
-            'key' => $this->faker->word,
-            'value' => $this->faker->sentence,
-            'tags' => json_encode($this->faker->words(3)),
+            'key' => $this->faker->unique()->word,
+            'content' => $this->faker->sentence,
+            'locale' => $this->faker->locale,
         ];
     }
 }

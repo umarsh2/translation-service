@@ -28,5 +28,9 @@ DB_PASSWORD=
 5. php artisan key:generate
 6. php artisan migrate
 7. php artisan db:seed --class=TranslationSeeder
-8. To test the endpoints, I have added a file named postman_collection.json and you can import it into postman to test the APIs.
+8. To test the endpoints, I have added a file named postman_collection.json at root of the project and you can import it into postman to test the APIs.
+
+### Assumptions 
+1. Translation may have multiple tags.
+2. We have defined tags like web, mobile and desktop only.
 

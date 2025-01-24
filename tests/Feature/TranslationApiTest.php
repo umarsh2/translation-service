@@ -16,7 +16,7 @@ class TranslationApiTest extends TestCase
             'locale' => 'en',
             'key' => 'greeting',
             'content' => 'Hello',
-            'tags' => ['web', 'common'],
+            'tags' => [1, 2],
         ]);
 
         $response->assertStatus(201);
@@ -34,7 +34,7 @@ class TranslationApiTest extends TestCase
             'locale' => 'en',
             'key' => $translation->key,
             'content' => 'Updated Content',
-            'tags' => ['web'],
+            'tags' => [1],
         ]);
 
         $response->assertStatus(200);
@@ -60,7 +60,7 @@ class TranslationApiTest extends TestCase
     {
         Translation::factory()->create(['locale' => 'en', 'key' => 'greeting', 'content' => 'Hello']);
 
-        $response = $this->getJson('/api/translations?locale=en&key=greeting');
+        $response = $this->getJson('/api/translations?locale=en&tags=mobile&key=welcome_message&content=our&per_page=2&page=1');
 
         $response->assertStatus(200)
                  ->assertJsonFragment(['key' => 'greeting', 'content' => 'Hello']);
@@ -70,7 +70,7 @@ class TranslationApiTest extends TestCase
     {
         Translation::factory()->count(10)->create();
 
-        $response = $this->getJson('/api/export');
+        $response = $this->getJson('/api/export?locale=en');
 
         $response->assertStatus(200);
         $this->assertCount(10, $response->json());
