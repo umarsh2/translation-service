@@ -21,7 +21,7 @@ This project is a Translation Management Service developed using Laravel to eval
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=translation_service
+DB_DATABASE=translation
 DB_USERNAME=root
 DB_PASSWORD=
 
