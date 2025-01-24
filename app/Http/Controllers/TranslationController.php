@@ -4,40 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TranslationRequest;
 use App\Repositories\TranslationRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TranslationController extends Controller
 {
-    protected $translationRepository;
+    private $repository;
 
-    public function __construct(TranslationRepository $translationRepository)
+    public function __construct(TranslationRepository $repository)
     {
-        $this->translationRepository = $translationRepository;
+        $this->repository = $repository;
     }
 
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->translationRepository->search($request->all()));
+        $filters = $request->only(['key', 'content', 'locale', 'tags']);
+
+        $results = $this->repository->search($filters);
+        return response()->json($results);
     }
 
-    public function store(TranslationRequest $request)
+    public function store(TranslationRequest $request): JsonResponse
     {
-        return response()->json($this->translationRepository->create($request->validated()));
+        $translation = $this->repository->create($request->validated());
+        return response()->json($translation, 201);
     }
 
-    public function update(TranslationRequest $request, $id)
+    public function update(TranslationRequest $request, int $id): JsonResponse
     {
-        return response()->json($this->translationRepository->update($id, $request->validated()));
+        $translation = $this->repository->update($id, $request->validated());
+        return response()->json($translation);
     }
 
-    public function destroy($id)
+    public function show(int $id): JsonResponse
     {
-        $this->translationRepository->delete($id);
-        return response()->json(['message' => 'Deleted successfully']);
+        $translation = $this->repository->find($id);
+        return response()->json($translation);
     }
 
-    public function export()
+    public function export(Request $request): JsonResponse
     {
-        return response()->json($this->translationRepository->export());
+        $locale = $request->locale ?? 'en';
+        $translations = $this->repository->exportTranslations($locale);
+        return response()->json($translations);
     }
 }

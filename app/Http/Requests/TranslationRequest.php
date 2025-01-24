@@ -23,10 +23,10 @@ class TranslationRequest extends FormRequest
     {
         return [
             'locale' => 'required|string|max:10',
-            'key' => 'required|string|max:255|unique:translations,key,' . $this->route('id'),
+            'key' => 'required|string|max:255',
             'content' => 'required|string',
             'tags' => 'nullable|array',
-            'tags.*' => 'string',
+            'tags.*' => 'integer|exists:tags,id',
         ];
     }
 }

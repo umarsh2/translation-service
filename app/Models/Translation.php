@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Translation extends Model
 {
-    protected $fillable = ['locale', 'key', 'content', 'tags'];
+    protected $fillable = ['locale', 'key', 'content'];
 
-    protected $casts = [
-        'tags' => 'array',
-    ];
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'translation_tag');
+    }
 }
